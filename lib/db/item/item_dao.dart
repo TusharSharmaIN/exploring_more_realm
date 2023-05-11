@@ -12,4 +12,10 @@ abstract class ItemDao {
   bool addItem(String text);
 
   bool deleteItem(Item item);
+
+  bool toggleFavourite(Item item);
+
+  bool updateQuantity(Item item, int offset);
+
+  bool clearItems();
 }

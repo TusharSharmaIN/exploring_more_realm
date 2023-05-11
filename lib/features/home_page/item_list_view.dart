@@ -6,11 +6,17 @@ class ItemListView extends StatelessWidget {
     Key? key,
     required this.items,
     required this.onDelete,
+    required this.onFavourite,
+    required this.onIncrementQuantity,
+    required this.onDecrementQuantity,
   }) : super(key: key);
 
   final List<Item> items;
 
   final Function(Item) onDelete;
+  final Function(Item) onFavourite;
+  final Function(Item) onIncrementQuantity;
+  final Function(Item) onDecrementQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +35,46 @@ class ItemListView extends StatelessWidget {
     Item item = items[index];
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Expanded(
+          child: Text(
+            item.text,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+        IconButton(
+          onPressed: () => onDecrementQuantity(item),
+          icon: const Icon(
+            Icons.remove,
+            color: Colors.indigo,
+            size: 25,
+            semanticLabel: 'Remove',
+          ),
+        ),
         Text(
-          item.text,
+          "${item.quantity}",
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+        IconButton(
+          onPressed: () => onIncrementQuantity(item),
+          icon: const Icon(
+            Icons.add,
+            color: Colors.indigo,
+            size: 25,
+            semanticLabel: 'Add More',
+          ),
+        ),
+        IconButton(
+          onPressed: () => onFavourite(item),
+          icon: Icon(
+            Icons.check,
+            color: item.isMarked ? Colors.teal : Colors.black12,
+            size: 25,
+            semanticLabel: 'Mark Favorite',
+          ),
         ),
         IconButton(
           onPressed: () => onDelete(item),

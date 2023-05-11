@@ -4,9 +4,11 @@ class AddItemView extends StatelessWidget {
   AddItemView({
     Key? key,
     required this.onAdd,
+    required this.onClear,
   }) : super(key: key);
 
   final Function(String) onAdd;
+  final Function() onClear;
   final TextEditingController textController = TextEditingController();
 
   @override
@@ -19,15 +21,34 @@ class AddItemView extends StatelessWidget {
         children: [
           TextField(
             controller: textController,
-            decoration: const InputDecoration(hintText: 'Enter item'),
+            decoration: InputDecoration(
+              hintText: 'Enter item',
+              hintStyle: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              if (textController.text.isNotEmpty) {
-                onAdd(textController.text);
-              }
-            },
-            child: const Text('Add Item'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  if (textController.text.isNotEmpty) {
+                    onAdd(textController.text);
+                    textController.clear();
+                  }
+                },
+                child: Text(
+                  'Add Item',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: onClear,
+                child: Text(
+                  'Clear List',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              )
+            ],
           )
         ],
       ),

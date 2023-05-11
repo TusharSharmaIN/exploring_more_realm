@@ -3,6 +3,11 @@ part 'item.g.dart';
 
 @RealmModel()
 class _Item {
+
   @PrimaryKey()
   late String text;
+
+  late bool isMarked;
+
+  late int quantity;
 }
