@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'features/home_page/home_page.dart';
 
@@ -11,20 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'List App',
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.normal,
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'List App',
+        theme: ThemeData(
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
+        home: const HomePage(title: 'Shopping List'),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const HomePage(
-        title: 'Shopping List',
-      ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

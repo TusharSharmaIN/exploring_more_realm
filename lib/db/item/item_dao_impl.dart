@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:realm/realm.dart';
 
 import 'item.dart';
@@ -96,3 +97,5 @@ class ItemDaoImpl implements ItemDao {
     }
   }
 }
+
+final itemDaoProvider = Provider<ItemDao>((ref) => ItemDaoImpl());
