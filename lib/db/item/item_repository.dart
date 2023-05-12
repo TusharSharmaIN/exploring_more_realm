@@ -89,5 +89,5 @@ class ItemRepository {
 }
 
 final itemRepositoryProvider = Provider<ItemRepository>((ref) {
-  return ItemRepository(ref.read(itemDaoProvider));
+  return ItemRepository(ref.watch(itemDaoProvider));
 });

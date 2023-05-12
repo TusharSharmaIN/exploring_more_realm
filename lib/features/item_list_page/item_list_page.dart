@@ -13,15 +13,15 @@ class ItemListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //  using this to perform operations data repository
-    final itemRepository = ref.read(itemRepositoryProvider);
+    final itemOperations = ref.read(itemRepositoryProvider);
     //  using this to listen to stream from repository
     final itemStream = ref.watch(itemRepositoryProvider).itemStream;
 
     return Column(
       children: [
         AddItemView(
-          onAdd: itemRepository.onAdd,
-          onClear: itemRepository.onClear,
+          onAdd: itemOperations.onAdd,
+          onClear: itemOperations.onClear,
         ),
         StreamBuilder(
           stream: itemStream,
@@ -34,10 +34,10 @@ class ItemListPage extends ConsumerWidget {
             }
             return ItemListView(
               items: snapshot.data.toList(),
-              onDelete: itemRepository.onDelete,
-              onFavourite: itemRepository.onFavourite,
-              onIncrementQuantity: itemRepository.onIncrementQuantity,
-              onDecrementQuantity: itemRepository.onDecrementQuantity,
+              onDelete: itemOperations.onDelete,
+              onFavourite: itemOperations.onFavourite,
+              onIncrementQuantity: itemOperations.onIncrementQuantity,
+              onDecrementQuantity: itemOperations.onDecrementQuantity,
             );
           },
         )
