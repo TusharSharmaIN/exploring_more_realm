@@ -96,6 +96,18 @@ class ItemDaoImpl implements ItemDao {
       return false;
     }
   }
+
+  @override
+  RealmResults<Item> getFilteredByMarked(MarkedFilterType type) {
+    switch (type) {
+      case MarkedFilterType.all:
+        return _realm.all<Item>();
+      case MarkedFilterType.completed:
+        return _realm.query<Item>('isMarked == true');
+      case MarkedFilterType.uncompleted:
+        return _realm.query<Item>('isMarked == false');
+    }
+  }
 }
 
 final itemDaoProvider = Provider<ItemDao>((ref) => ItemDaoImpl());

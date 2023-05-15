@@ -15,18 +15,23 @@ class ItemRepository {
   late final Stream itemStream;
   late final StreamSubscription<RealmResultsChanges<Item>> itemsSubscription;
 
+  late MarkedFilterType markedFilterType;
+
   ItemRepository(this.itemDao) {
     init();
   }
 
   init() {
+    markedFilterType = MarkedFilterType.all;
+
     itemStreamController = StreamController<RealmResults<Item>>();
     itemStream = itemStreamController.stream;
 
     itemsSubscription = itemDao.getItems().changes.listen(
       (changes) {
         // changes.result why? changes result will give RealmResults
-        itemStreamController.add(changes.results);
+        updateMarkedFilterType(markedFilterType);
+        // itemStreamController.add(changes.results);
       },
     );
   }
@@ -86,8 +91,15 @@ class ItemRepository {
       debugPrint('Something went wrong while clearing');
     }
   }
+
+  updateMarkedFilterType(MarkedFilterType type) {
+    debugPrint('Filtered results: $type');
+    markedFilterType = type;
+    final items = itemDao.getFilteredByMarked(markedFilterType);
+    itemStreamController.add(items);
+  }
 }
 
 final itemRepositoryProvider = Provider<ItemRepository>((ref) {
-  return ItemRepository(ref.watch(itemDaoProvider));
+  return ItemRepository(ref.read(itemDaoProvider));
 });

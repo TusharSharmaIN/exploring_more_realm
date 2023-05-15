@@ -1,4 +1,7 @@
+import 'package:exploring_more_realm/utils/app_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/app_styles/app_colors.dart';
 
 class AddItemView extends StatelessWidget {
   AddItemView({
@@ -19,37 +22,47 @@ class AddItemView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextField(
-            controller: textController,
-            decoration: InputDecoration(
-              hintText: 'Enter item',
-              hintStyle: Theme.of(context).textTheme.bodyLarge,
+          Container(
+            decoration: const BoxDecoration(
+              color: AppColors.grey,
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            ),
+            child: TextField(
+              controller: textController,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.edit),
+                hintText: 'Enter item',
+                hintStyle: AppTextStyles.poppinsNormal18.copyWith(
+                  color: AppColors.white,
+                ),
+                border: InputBorder.none,
+              ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  if (textController.text.isNotEmpty) {
-                    onAdd(textController.text);
-                    textController.clear();
-                  }
-                },
-                child: Text(
-                  'Add Item',
-                  style: Theme.of(context).textTheme.bodyLarge,
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              if (textController.text.isNotEmpty) {
+                onAdd(textController.text);
+                textController.clear();
+              }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.add,
+                  color: AppColors.black,
                 ),
-              ),
-              ElevatedButton(
-                onPressed: onClear,
-                child: Text(
-                  'Clear List',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                Text(
+                  "Add new item",
+                  style: AppTextStyles.poppinsNormal18.copyWith(
+                    color: AppColors.black,
+                  ),
                 ),
-              )
-            ],
-          )
+              ],
+            ),
+          ),
         ],
       ),
     );

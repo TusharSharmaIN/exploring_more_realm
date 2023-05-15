@@ -18,4 +18,12 @@ abstract class ItemDao {
   bool updateQuantity(Item item, int offset);
 
   bool clearItems();
+
+  RealmResults<Item> getFilteredByMarked(MarkedFilterType type);
+}
+
+enum MarkedFilterType {
+  all,
+  completed,
+  uncompleted,
 }

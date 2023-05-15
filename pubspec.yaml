@@ -12,8 +12,14 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  # for database
   realm: ^1.0.3
+
+  # for state management
   flutter_riverpod: ^2.3.6
+
+  # for google fonts
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
