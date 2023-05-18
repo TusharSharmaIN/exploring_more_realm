@@ -25,4 +25,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: staging-release-apk
-          path: build/app/outputs/flutter-apk/app-staging-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
